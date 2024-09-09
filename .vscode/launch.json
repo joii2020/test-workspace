@@ -1,19 +1,23 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
     "configurations": [
         {
-            "name": "GDB",
-            "type": "gdb",
-            "request": "attach",
-            "executable": "${workspaceRoot}/build/debug/exec-parent",
-            "cwd": "${workspaceRoot}",
-            "remote": true,
-            "target": "127.0.0.1:8000",
-            "preLaunchTask": "StartDbg-exec-parent",
-            "postDebugTask": "StopCkbDebugger",
+            "type": "lldb",
+            "request": "launch",
+            "name": "Cargo test",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--package=tests",
+                    "--lib",
+                    "--no-run",
+                ]
+            },
+            "args": [
+                "tests::test_spawn_base",
+                "--exact",
+                "--show-output",
+                "--nocapture"
+            ]
         }
     ]
 }

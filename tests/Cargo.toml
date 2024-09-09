@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [features]
-# default = ["native-simulator"]
+default = ["native-simulator"]
 native-simulator = [ "ckb-testtool/native-simulator" ]
 
 [dependencies]
