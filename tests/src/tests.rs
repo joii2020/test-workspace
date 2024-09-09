@@ -16,6 +16,9 @@ const MAX_CYCLES: u64 = 500_0000;
 #[test]
 fn test_exec() {
     let mut context = Context::default();
+    context.add_contract_dir("../target/debug/");
+    context.add_contract_dir("target/debug/");
+
     let out_point_exec_parent = context.deploy_cell_by_name("exec-parent");
     let out_point_exec_child = context.deploy_cell_by_name("exec-child");
 

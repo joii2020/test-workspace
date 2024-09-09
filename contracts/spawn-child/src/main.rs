@@ -11,8 +11,20 @@ ckb_std::entry!(program_entry);
 #[cfg(not(any(feature = "native-simulator", test)))]
 default_alloc!();
 
-pub fn program_entry() -> i8 {
-    ckb_std::debug!("This is a sample contract!");
+use ckb_std::syscalls;
+use alloc::vec;
 
+pub fn program_entry() -> i8 {
+    ckb_std::debug!("This is a sample contract spawn-child!");
+
+    let argv = ckb_std::env::argv();
+    let mut std_fds: [u64; 2] = [0; 2];
+    syscalls::inherited_file_descriptors(&mut std_fds);
+    let mut out = vec![];
+    for arg in argv {
+        out.extend_from_slice(arg.to_bytes());
+    }
+    let len = syscalls::write(std_fds[1], &out).expect("child write");
+    assert_eq!(len, 10);
     0
 }
