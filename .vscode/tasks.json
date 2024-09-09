@@ -28,5 +28,14 @@
             "type": "shell",
             "command": "killall ckb-debugger || true"
         },
+        {
+            "label": "RunDBG",
+            "type": "shell",
+            "command": "cargo test --package tests --lib -- tests::test_spawn --exact --show-output  --nocapture",
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+        },
     ],
 }
